@@ -5,7 +5,7 @@ html, body {
   height: 100%;
   color: white;
   font-family: 'Roboto', sans-serif;
-  background-color: black;
+  background-color: #222;
 }
 
 h1 {
@@ -78,6 +78,7 @@ article {
 
   background-size: cover;
   position: relative;
+  background-position: center center;
   z-index: 1;
 
   display: flex;
@@ -85,7 +86,7 @@ article {
   justify-content: center;
 }
 
-article:not(:hover):after {
+article:after {
   content: "";
   display: block;
   position: absolute;
@@ -93,7 +94,14 @@ article:not(:hover):after {
   height: 100%;
   top: 0;
   left: 0;
-  background-color: rgba(0, 0, 0, 0.333);
+}
+
+article:not(:hover):after {
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+article:hover:after {
+  background-color: rgba(0, 0, 0, 0.25);
 }
 
 header {
