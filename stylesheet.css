@@ -33,13 +33,47 @@ a:hover {
   border-bottom: 0.25em solid white;
 }
 
+nav {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 3;
+}
+
+nav > a {
+  border: none;
+}
+
+nav > a:hover {
+  border: none;
+}
+
+nav > a > svg {
+  width: 26px;
+}
+
+nav > a > svg:hover {
+  color: rgba(255, 255, 255, 0.75);
+}
+
+nav > figure {
+  margin: 0;
+  display: inline-block;
+}
+
+nav > figure > img {
+  width: 32px;
+  border-radius: 50%;
+  margin-right: 8px;
+}
+
 section {
   display: flex;
   min-height: 100%;
 }
 
 article {
-  flex: 1 1 auto;
+  flex: 1;
   align-items: stretch;
 
   background-size: cover;
@@ -50,19 +84,6 @@ article {
   align-items: center;
   justify-content: center;
 }
-
-@media only screen and (max-width: 480px) {
-  section {
-    flex-direction: column;
-  }
-}
-
-@media only screen and (min-width: 480px) {
-  section {
-    flex-direction: row;
-  }
-}
-
 
 article:not(:hover):after {
   content: "";
@@ -81,6 +102,40 @@ header {
   text-align: center;
 }
 
-header > * {
-  margin: 0.25em 0;
+header > small {
+  margin: 0;
+  padding: 0;
+}
+
+
+@media only screen and (max-width: 480px) {
+  section {
+    flex-direction: column;
+  }
+
+  article:first-of-type {
+    padding-top: 2.5em;
+  }
+
+  header {
+    padding: 3em 0;
+  }
+
+  header > h1 {
+    margin: 0 0;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  section {
+    flex-direction: row;
+  }
+
+  header {
+    padding: 1em;
+  }
+
+  header > h1 {
+    margin: 0.2em 0;
+  }
 }
