@@ -12,6 +12,7 @@ html,body,div,span,applet,object,iframe, h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,ab
   font-size: 100%;
   font: inherit;
   vertical-align: baseline;
+  user-select: none;
 }
 
 article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
@@ -43,11 +44,11 @@ a {
   color: inherit;
   text-decoration: none;
   text-transform: uppercase;
-  border-bottom: 0.1em solid white;
+  border-bottom: 0.15em solid white;
 }
 
 a:hover {
-  border-bottom: 0.1em dotted white;
+  border-bottom: 0.25em solid white;
 }
 
 ol, ul {
@@ -80,19 +81,18 @@ table {
   border-spacing: 0;
 }
 
-body {
-  width: 100%;
+html, body {
   height: 100%;
-  position: absolute;
-
-  display: flex;
-  align-items: stretch;
-  flex-direction: row;
 }
 
 section {
-  flex: 1;
-  height: 100%;
+  display: flex;
+  min-height: 100%;
+}
+
+article {
+  flex: 1 1 auto;
+  align-items: stretch;
 
   background-size: cover;
   position: relative;
@@ -103,7 +103,20 @@ section {
   justify-content: center;
 }
 
-section:not(:hover):after {
+@media only screen and (max-width: 480px) {
+  section {
+    flex-direction: column;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  section {
+    flex-direction: row;
+  }
+}
+
+
+article:not(:hover):after {
   content: "";
   display: block;
   position: absolute;
@@ -114,12 +127,12 @@ section:not(:hover):after {
   background-color: rgba(0, 0, 0, 0.333);
 }
 
-article {
+header {
   position: relative;
   z-index: 2;
   text-align: center;
 }
 
-article > * {
+header > * {
   margin: 0.25em 0;
 }
