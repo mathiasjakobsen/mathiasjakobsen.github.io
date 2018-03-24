@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css?family=Anton|Roboto:400,500');
 
-
 html, body {
   height: 100%;
   color: white;
@@ -68,22 +67,36 @@ nav > figure > img {
 }
 
 section {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
   min-height: 100%;
 }
 
 article {
-  flex: 1;
-  align-items: stretch;
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  -webkit-box-align: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
 
   background-size: cover;
   position: relative;
   background-position: center center;
   z-index: 1;
 
+  display: -webkit-box;
+
+  display: -ms-flexbox;
+
   display: flex;
-  align-items: center;
-  justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 article:after {
@@ -118,7 +131,10 @@ header > small {
 
 @media only screen and (max-width: 480px) {
   section {
-    flex-direction: column;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
   }
 
   article:first-of-type {
@@ -136,7 +152,10 @@ header > small {
 
 @media only screen and (min-width: 480px) {
   section {
-    flex-direction: row;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: row;
+            flex-direction: row;
   }
 
   header {
