@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css?family=Anton|Roboto:400,500');
+/* @import url('https://fonts.googleapis.com/css?family=Anton|Roboto:400,500'); */
 
 html, body {
   height: 100%;
@@ -115,7 +115,7 @@ article:after {
   left: 0;
 }
 
-article.blurred:after {
+article.lazy:after {
   filter: blur(40px);
 }
 
