@@ -152,10 +152,6 @@ article:after {
   left: 0;
 }
 
-article.lazy:after {
-  filter: blur(40px);
-}
-
 article:not(:hover):after {
   background-color: rgba(0, 0, 0, 0.5);
 }
