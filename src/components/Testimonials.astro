@@ -1,0 +1,168 @@
+---
+const testimonials = [
+  {
+    id: 1,
+    name: 'Sarah Chen',
+    role: 'CEO, DataFlow Inc',
+    text: 'Mathias hjalp os med at skalere fra 10 til 100 udviklere samtidig med at vi fastholdt kodekvaliteten. Hans arkitekturbeslutninger sparede os for utallige hovedpiner senere hen.',
+    image: 'https://i.pravatar.cc/80?img=5',
+  },
+  {
+    id: 2,
+    name: 'Marcus Rodriguez',
+    role: 'VP Engineering, CloudScale',
+    text: 'At arbejde med Mathias var transformerende. Han bragte moderne praksisser til vores legacy-system og mentorerede vores team gennem overgangen.',
+    image: 'https://i.pravatar.cc/80?img=12',
+  },
+  {
+    id: 3,
+    name: 'Emma Johnson',
+    role: 'Founder, FinTech Ventures',
+    text: 'Hans tekniske dybde kombineret med forretningsforståelse er sjælden. Mathias byggede vores MVP og hjalp os med at sikre Series A finansiering.',
+    image: 'https://i.pravatar.cc/80?img=9',
+  },
+  {
+    id: 4,
+    name: 'David Park',
+    role: 'CTO, Retail Innovations',
+    text: 'Mathias påtog sig vores mest komplekse infrastruktur-udfordringer og leverede elegante løsninger. Ægte teknisk lederskab.',
+    image: 'https://i.pravatar.cc/80?img=33',
+  },
+  {
+    id: 5,
+    name: 'Lisa Thompson',
+    role: 'Product Director, SaaS Corp',
+    text: 'Han forstod vores produktvision og oversatte den til robust, skalerbar arkitektur. Den bedste engineering-partner vi har haft.',
+    image: 'https://i.pravatar.cc/80?img=10',
+  },
+  {
+    id: 6,
+    name: 'James Wilson',
+    role: 'Founder, DevTools Co',
+    text: 'Mathias skriver ikke bare kode - han bygger systemer der holder. Hans arbejde er fundamentet vores virksomhed kører på.',
+    image: 'https://i.pravatar.cc/80?img=15',
+  },
+];
+---
+
+<section id="testimonials" class="py-16 md:py-24">
+  <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-frost-dark dark:text-gray-100 mb-4">
+        Hvad andre siger
+      </h2>
+      <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300">
+        Jeg er stolt af de relationer jeg har bygget og den indflydelse vi har skabt sammen.
+      </p>
+    </div>
+
+    <div class="relative">
+      <!-- Navigation Buttons -->
+      <button
+        id="testimonial-prev"
+        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:bg-frost-dark hover:text-white transition-all duration-250 flex items-center justify-center group"
+        aria-label="Previous testimonial"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"></path>
+        </svg>
+      </button>
+
+      <button
+        id="testimonial-next"
+        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:bg-frost-dark hover:text-white transition-all duration-250 flex items-center justify-center group"
+        aria-label="Next testimonial"
+      >
+        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+        </svg>
+      </button>
+
+      <!-- Testimonials Carousel -->
+      <div class="overflow-hidden">
+        <div
+          id="testimonials-track"
+          class="flex transition-transform duration-500 ease-out"
+        >
+          {testimonials.map((testimonial) => (
+            <div class="flex-shrink-0 w-full px-4">
+              <div class="bg-white rounded-frost p-8 md:p-12 shadow-sm">
+                <div class="flex flex-col md:flex-row items-start gap-6">
+                  <img
+                    src={testimonial.image}
+                    alt={`Profilbillede af ${testimonial.name}`}
+                    class="w-20 h-20 rounded-full object-cover flex-shrink-0 grayscale"
+                    loading="lazy"
+                  />
+                  <div class="flex-1">
+                    <p class="text-lg md:text-xl text-frost-accent leading-relaxed mb-6 italic">
+                      "{testimonial.text}"
+                    </p>
+                    <div>
+                      <p class="font-medium text-frost-dark">{testimonial.name}</p>
+                      <p class="text-sm text-frost-accent">{testimonial.role}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <!-- Dots Navigation -->
+      <div class="flex justify-center gap-2 mt-8">
+        {testimonials.map((_, index) => (
+          <button
+            class="testimonial-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-frost-accent transition-colors duration-250"
+            data-index={index}
+            aria-label={`Go to testimonial ${index + 1}`}
+          ></button>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  const track = document.getElementById('testimonials-track') as HTMLElement;
+  const prevButton = document.getElementById('testimonial-prev');
+  const nextButton = document.getElementById('testimonial-next');
+  const dots = document.querySelectorAll('.testimonial-dot');
+  const totalSlides = dots.length;
+  let currentIndex = 0;
+
+  function updateCarousel(index: number) {
+    currentIndex = index;
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+
+    dots.forEach((dot, i) => {
+      if (i === currentIndex) {
+        dot.classList.remove('bg-gray-300');
+        dot.classList.add('bg-frost-dark');
+      } else {
+        dot.classList.remove('bg-frost-dark');
+        dot.classList.add('bg-gray-300');
+      }
+    });
+  }
+
+  prevButton?.addEventListener('click', () => {
+    const newIndex = currentIndex > 0 ? currentIndex - 1 : totalSlides - 1;
+    updateCarousel(newIndex);
+  });
+
+  nextButton?.addEventListener('click', () => {
+    const newIndex = currentIndex < totalSlides - 1 ? currentIndex + 1 : 0;
+    updateCarousel(newIndex);
+  });
+
+  dots.forEach((dot, index) => {
+    dot.addEventListener('click', () => {
+      updateCarousel(index);
+    });
+  });
+
+  // Initialize first dot as active
+  updateCarousel(0);
+</script>

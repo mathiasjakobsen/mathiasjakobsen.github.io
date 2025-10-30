@@ -1,0 +1,156 @@
+---
+const services = [
+  {
+    id: 'architecture',
+    title: 'Digital strategi for din SMV',
+    price: 'Fra 9.995,00 kr.',
+    status: 'yellow',
+    summary: 'Design af skalerbare systemer der vokser med dine forretningsbehov.',
+    details: [
+      'Systemarkitektur gennemgang og design',
+      'Evaluering og valg af teknologisk stack',
+      'Microservices og distribuerede systemer',
+      'Cloud infrastruktur planlægning (AWS, GCP, Azure)',
+      'Performance optimering og skaleringsstrategier',
+    ],
+  },
+  {
+    id: 'engineering',
+    title: 'Hands-on produkt- og softwareudvikling',
+    price: 'Fra 1.100 kr. i timen ved klippekort',
+    status: 'green',
+    summary: 'Byg software af høj kvalitet med moderne best practices.',
+    details: [
+      'Full-stack udvikling (React, Node.js, Python, Go)',
+      'API design og implementering',
+      'Database optimering og design',
+      'CI/CD pipeline opsætning og automatisering',
+      'Code review og team mentorskab',
+    ],
+  },
+  {
+    id: 'leadership',
+    title: 'Fractional CTO',
+    price: 'Fast aftalt pris pr. måned. Ingen binding.',
+    status: 'red',
+    summary: 'Dit eksterne CTO/tekniske lead, som en forlænget del af dit team.',
+    details: [
+      'Opbygning og ansættelse af udviklingsteam',
+      'Optimering af udviklingsprocesser',
+      'Roadmap planlægning og prioritering',
+      'Håndtering af teknisk gæld',
+      'Engineering kultur og best practices',
+    ],
+  },
+];
+
+const getStatusColor = (status: string) => {
+  switch (status) {
+    case 'green':
+      return 'bg-green-500';
+    case 'yellow':
+      return 'bg-yellow-500';
+    case 'red':
+      return 'bg-red-500';
+    default:
+      return 'bg-gray-500';
+  }
+};
+---
+
+<section id="services" class="py-16 md:py-24">
+  <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-frost-dark dark:text-gray-100 mb-4">
+        Hvad har I brug for?
+      </h2>
+      <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 max-w-3xl">
+        Jeg tilbyder fleksible samarbejdsmodeller der passer til dine behov - fra enkeltstående projekter til løbende teknisk ledelse.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:gap-8">
+      {services.map((service) => (
+        <div class="border border-gray-200 dark:border-gray-700 bg-white dark:bg-gray-800 rounded-frost overflow-hidden hover:shadow-lg transition-shadow duration-250">
+          <button
+            class="service-toggle w-full p-6 md:p-8 text-left hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors duration-250"
+            data-service={service.id}
+            aria-expanded="false"
+          >
+            <div class="flex justify-between items-start gap-4">
+              <div class="flex-1">
+                <h3 class="text-xl md:text-2xl font-light text-frost-dark dark:text-gray-100 mb-2">
+                  {service.title}
+                </h3>
+                <p class="text-frost-accent dark:text-gray-300 mb-2">{service.summary}</p>
+                <div class="flex items-center gap-2">
+                  <span class={`w-2 h-2 rounded-full ${getStatusColor(service.status)}`}></span>
+                  <p class="text-lg font-medium text-frost-dark dark:text-gray-200">{service.price}</p>
+                </div>
+              </div>
+              <svg
+                class="service-arrow w-6 h-6 text-frost-dark dark:text-gray-300 transition-transform duration-250 flex-shrink-0 mt-1"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+              </svg>
+            </div>
+          </button>
+
+          <div
+            class="service-content max-h-0 overflow-hidden transition-all duration-500"
+            data-service={service.id}
+          >
+            <div class="px-6 md:px-8 pb-6 md:pb-8 pt-2">
+              <div class="border-t border-gray-200 dark:border-gray-700 pt-6">
+                <h4 class="text-lg font-medium text-frost-dark dark:text-gray-100 mb-4">Hvad du får:</h4>
+                <ul class="space-y-3">
+                  {service.details.map((detail) => (
+                    <li class="flex items-start">
+                      <svg
+                        class="w-5 h-5 text-frost-dark dark:text-gray-300 mt-0.5 mr-3 flex-shrink-0"
+                        fill="none"
+                        stroke="currentColor"
+                        viewBox="0 0 24 24"
+                      >
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-frost-accent dark:text-gray-300">{detail}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<script>
+  const toggleButtons = document.querySelectorAll('.service-toggle');
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const serviceId = button.getAttribute('data-service');
+      const content = document.querySelector(`.service-content[data-service="${serviceId}"]`) as HTMLElement;
+      const arrow = button.querySelector('.service-arrow');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Collapse
+        content.style.maxHeight = '0';
+        arrow?.classList.remove('rotate-180');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        // Expand
+        content.style.maxHeight = content.scrollHeight + 'px';
+        arrow?.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

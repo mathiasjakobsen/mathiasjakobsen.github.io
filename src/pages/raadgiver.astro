@@ -1,0 +1,68 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout title="Teknisk Rådgiver - Mathias Jakobsen">
+  <Header />
+  <main>
+    <section class="pt-24 md:pt-32 pb-16 md:pb-24">
+      <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-frost-dark leading-tight mb-6">
+          Teknisk Rådgivning
+        </h1>
+        <p class="text-lg md:text-xl text-frost-accent leading-relaxed max-w-3xl mb-12">
+          Få strategisk teknisk rådgivning til dine vigtigste beslutninger. Jeg hjælper virksomheder med at navigere komplekse tekniske udfordringer.
+        </p>
+
+        <div class="space-y-12">
+          <div>
+            <h2 class="text-2xl md:text-3xl font-light text-frost-dark mb-4">
+              Rådgivningsområder
+            </h2>
+            <div class="grid gap-6">
+              <div class="bg-white rounded-frost p-6 md:p-8">
+                <h3 class="text-xl font-medium text-frost-dark mb-3">Teknisk Due Diligence</h3>
+                <p class="text-frost-accent">
+                  Evaluering af tekniske systemer for investorer og opkøbere. Identificer risici, muligheder og teknisk gæld.
+                </p>
+              </div>
+
+              <div class="bg-white rounded-frost p-6 md:p-8">
+                <h3 class="text-xl font-medium text-frost-dark mb-3">Arkitektur Review</h3>
+                <p class="text-frost-accent">
+                  Gennemgang af eksisterende systemer med anbefalinger til forbedringer, skalering og modernisering.
+                </p>
+              </div>
+
+              <div class="bg-white rounded-frost p-6 md:p-8">
+                <h3 class="text-xl font-medium text-frost-dark mb-3">Teknologi Valg</h3>
+                <p class="text-frost-accent">
+                  Hjælp til at vælge den rette tech stack, cloud platform og værktøjer til dit projekt.
+                </p>
+              </div>
+
+              <div class="bg-white rounded-frost p-6 md:p-8">
+                <h3 class="text-xl font-medium text-frost-dark mb-3">Team & Proces Optimering</h3>
+                <p class="text-frost-accent">
+                  Forbedring af development processer, team struktur og engineering kultur.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div class="pt-8">
+            <a
+              href="/kontakt"
+              class="inline-block px-8 py-3 bg-frost-dark text-white rounded-frost hover:bg-frost-accent transition-all duration-250 hover:scale-105 hover:shadow-lg"
+            >
+              Book Konsultation
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

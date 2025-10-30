@@ -1,0 +1,107 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+
+const cases = [
+  {
+    title: 'E-commerce Platform Redesign',
+    client: 'Nordic Retail Group',
+    description: 'Led the complete architectural redesign of a legacy e-commerce platform, improving performance by 300% and reducing infrastructure costs by 40%.',
+    technologies: ['React', 'Node.js', 'PostgreSQL', 'AWS'],
+    results: [
+      '300% improvement in page load times',
+      '40% reduction in infrastructure costs',
+      'Scaled to handle 10x traffic during peak seasons',
+    ],
+  },
+  {
+    title: 'FinTech MVP Development',
+    client: 'StartupBank',
+    description: 'Built the initial product from scratch for a fintech startup, helping them secure Series A funding within 6 months of launch.',
+    technologies: ['TypeScript', 'GraphQL', 'React Native', 'GCP'],
+    results: [
+      'Delivered MVP in 3 months',
+      'Helped secure €2M Series A funding',
+      'Grew to 50,000 users in first year',
+    ],
+  },
+  {
+    title: 'Legacy System Modernization',
+    client: 'Manufacturing Corp',
+    description: 'Planned and executed the migration of a 15-year-old monolith to a modern microservices architecture without disrupting business operations.',
+    technologies: ['Go', 'Kubernetes', 'Event-Driven Architecture'],
+    results: [
+      'Zero downtime migration',
+      'Improved deployment frequency from monthly to daily',
+      'Reduced bug reports by 60%',
+    ],
+  },
+];
+---
+
+<Layout title="Cases - Mathias Jakobsen">
+  <Header />
+  <main>
+    <section class="pt-24 md:pt-32 pb-16 md:pb-24">
+      <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-frost-dark leading-tight mb-6">
+          Case Studies
+        </h1>
+        <p class="text-lg md:text-xl text-frost-accent leading-relaxed max-w-3xl mb-12">
+          Selected projects showcasing real-world impact and measurable results.
+        </p>
+
+        <div class="space-y-12">
+          {cases.map((caseStudy) => (
+            <div class="bg-white rounded-frost p-8 md:p-10">
+              <h2 class="text-2xl md:text-3xl font-light text-frost-dark mb-2">
+                {caseStudy.title}
+              </h2>
+              <p class="text-frost-accent mb-6">{caseStudy.client}</p>
+              
+              <p class="text-lg text-frost-accent leading-relaxed mb-6">
+                {caseStudy.description}
+              </p>
+
+              <div class="mb-6">
+                <h3 class="text-sm font-medium text-frost-accent mb-2">Technologies</h3>
+                <div class="flex flex-wrap gap-2">
+                  {caseStudy.technologies.map((tech) => (
+                    <span class="px-3 py-1 bg-frost-light text-frost-accent text-sm rounded-full border border-gray-200">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <h3 class="text-sm font-medium text-frost-accent mb-3">Results</h3>
+                <ul class="space-y-2">
+                  {caseStudy.results.map((result) => (
+                    <li class="flex items-start">
+                      <svg class="w-5 h-5 text-frost-dark mt-0.5 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+                      </svg>
+                      <span class="text-frost-accent">{result}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-12">
+          <a
+            href="/kontakt"
+            class="inline-block px-8 py-3 bg-frost-dark text-white rounded-frost hover:bg-frost-accent transition-all duration-250 hover:scale-105 hover:shadow-lg"
+          >
+            Discuss Your Project
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>

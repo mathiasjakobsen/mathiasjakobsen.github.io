@@ -1,0 +1,68 @@
+---
+const scenarios = [
+  {
+    industry: 'Early-Stage Startups',
+    challenge: 'Behov for at bevæge sig hurtigt uden at akkumulere teknisk gæld',
+    solution: 'Jeg bygger MVP\'er med produktionsklar arkitektur, der giver dig fleksibilitet til at skalere uden omskrivninger.',
+    tags: ['MVP Udvikling', 'Tech Stack', 'Hurtig Iteration'],
+  },
+  {
+    industry: 'Voksende Virksomheder',
+    challenge: 'Skalering af infrastruktur samtidig med at velocity fastholdes',
+    solution: 'Jeg designer systemer der håndterer 10x vækst, implementerer overvågning og etablerer engineering best practices.',
+    tags: ['Skalerbarhed', 'DevOps', 'Team Processer'],
+  },
+  {
+    industry: 'Enterprise Teams',
+    challenge: 'Modernisering af legacy-systemer uden at forstyrre forretningen',
+    solution: 'Jeg planlægger trinvise migrationsstrategier, introducerer moderne værktøjer og opkvalificerer dit udviklingsteam.',
+    tags: ['Legacy Migration', 'Arkitektur', 'Mentorskab'],
+  },
+  {
+    industry: 'Produktvirksomheder',
+    challenge: 'Balance mellem feature velocity og teknisk ekspertise',
+    solution: 'Jeg etablerer effektive udviklingsworkflows, automatiseret testning og klare tekniske roadmaps.',
+    tags: ['Proces Optimering', 'CI/CD', 'Kvalitet'],
+  },
+];
+---
+
+<section class="py-16 md:py-24">
+  <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+    <div class="mb-12 md:mb-16">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-frost-dark dark:text-gray-100 mb-4">
+        Jeg forstår dine udfordringer
+      </h2>
+      <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 max-w-3xl">
+        Uanset om du er en startup eller enterprise, har jeg hjulpet virksomheder med at navigere komplekse tekniske udfordringer og levere resultater.
+      </p>
+    </div>
+
+    <div class="grid gap-6 md:gap-8">
+      {scenarios.map((scenario) => (
+        <div class="bg-white dark:bg-gray-800 rounded-frost p-6 md:p-8 hover:shadow-lg transition-all duration-250 border border-gray-200 dark:border-gray-700">
+          <h3 class="text-2xl font-light text-frost-dark dark:text-gray-100 mb-3">
+            {scenario.industry}
+          </h3>
+          <div class="space-y-4 mb-6">
+            <div>
+              <p class="text-sm font-medium text-frost-accent dark:text-gray-400 mb-1">Udfordring:</p>
+              <p class="text-frost-dark dark:text-gray-200">{scenario.challenge}</p>
+            </div>
+            <div>
+              <p class="text-sm font-medium text-frost-accent dark:text-gray-400 mb-1">Løsning:</p>
+              <p class="text-frost-dark dark:text-gray-200">{scenario.solution}</p>
+            </div>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            {scenario.tags.map((tag) => (
+              <span class="px-3 py-1 bg-frost-light dark:bg-gray-700 text-frost-accent dark:text-gray-300 text-sm rounded-full border border-gray-200 dark:border-gray-600">
+                {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
