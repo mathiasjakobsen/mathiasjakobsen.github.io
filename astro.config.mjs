@@ -7,6 +7,6 @@ import sitemap from '@astrojs/sitemap';
 // https://astro.build/config
 export default defineConfig({
   integrations: [tailwind(), sitemap()],
-  site: 'https://mathiasjakobsen.dk',
-  outDir: 'docs',
+  site: 'https://mathiasjakobsen.github.io/',
+  // outDir: 'docs',
 });
