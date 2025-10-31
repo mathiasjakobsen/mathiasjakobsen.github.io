@@ -1,4 +1,6 @@
 ---
+import OfficeStatus from './OfficeStatus.astro';
+
 const currentYear = new Date().getFullYear();
 
 const quickLinks = [
@@ -23,10 +25,10 @@ const socialLinks = [
 ];
 
 const legalLinks = [
-  { href: '#', label: 'AI-holdning' },
-  { href: '#', label: 'Tilgængelighed' },
-  { href: '#', label: 'Privatlivspolitik' },
-  { href: '#', label: 'Vilkår & betingelser' },
+  { href: '/ai', label: 'AI-holdning' },
+  { href: '/tilgaengelighed', label: 'Tilgængelighed' },
+  { href: '/databeskyttelse', label: 'Databeskyttelse' },
+  { href: '/vilkaar-og-betingelser', label: 'Vilkår & betingelser' },
 ];
 ---
 
@@ -52,13 +54,7 @@ const legalLinks = [
             8000 Aarhus C<br>
           </a>
         </address>
-        <div class="flex items-center gap-2">
-          <span class="relative flex items-center justify-center">
-            <span id="office-status-pulse" class="absolute w-3 h-3 rounded-full animate-pulse opacity-75"></span>
-            <span id="office-status-dot" class="relative w-2 h-2 rounded-full"></span>
-          </span>
-          <span id="office-status-text" class="text-sm text-frost-accent dark:text-gray-400"></span>
-        </div>
+        <OfficeStatus />
       </div>
 
       <!-- Quick Links -->
@@ -136,43 +132,3 @@ const legalLinks = [
     </div>
   </div>
 </footer>
-
-<script>
-  function updateOfficeStatus() {
-    const now = new Date();
-    const hours = now.getHours();
-    const minutes = now.getMinutes();
-    const currentTime = hours * 60 + minutes; // Convert to minutes since midnight
-
-    const officeStart = 8 * 60 + 30; // 08:30 in minutes
-    const officeEnd = 16 * 60; // 16:00 in minutes
-
-    const isInOffice = currentTime >= officeStart && currentTime < officeEnd;
-
-    const statusDot = document.getElementById('office-status-dot');
-    const statusPulse = document.getElementById('office-status-pulse');
-    const statusText = document.getElementById('office-status-text');
-
-    if (statusDot && statusPulse && statusText) {
-      if (isInOffice) {
-        statusDot.classList.add('bg-green-500');
-        statusDot.classList.remove('bg-red-500');
-        statusPulse.classList.add('bg-green-500');
-        statusPulse.classList.remove('bg-red-500');
-        statusText.textContent = 'På kontoret';
-      } else {
-        statusDot.classList.add('bg-red-500');
-        statusDot.classList.remove('bg-green-500');
-        statusPulse.classList.add('bg-red-500');
-        statusPulse.classList.remove('bg-green-500');
-        statusText.textContent = 'Ikke på kontoret';
-      }
-    }
-  }
-
-  // Update immediately
-  updateOfficeStatus();
-
-  // Update every minute
-  setInterval(updateOfficeStatus, 60000);
-</script>

@@ -1,0 +1,59 @@
+---
+---
+
+<div class="flex items-center gap-2">
+  <span class="relative flex items-center justify-center">
+    <span id="office-status-pulse" class="absolute w-3 h-3 rounded-full animate-pulse opacity-75"></span>
+    <span id="office-status-dot" class="relative w-2 h-2 rounded-full"></span>
+  </span>
+  <span id="office-status-text" class="text-sm text-frost-accent dark:text-gray-400"></span>
+</div>
+
+<script>
+  function updateOfficeStatus() {
+    const now = new Date();
+    const hours = now.getHours();
+    const minutes = now.getMinutes();
+    const currentTime = hours * 60 + minutes; // Convert to minutes since midnight
+
+    const officeStart = 8 * 60 + 30; // 08:30 in minutes
+    const officeEnd = 16 * 60; // 16:00 in minutes
+
+    const isInOffice = currentTime >= officeStart && currentTime < officeEnd;
+
+    // Update all instances on the page
+    const statusDots = document.querySelectorAll('#office-status-dot');
+    const statusPulses = document.querySelectorAll('#office-status-pulse');
+    const statusTexts = document.querySelectorAll('#office-status-text');
+
+    statusDots.forEach((dot) => {
+      if (isInOffice) {
+        dot.classList.add('bg-green-500');
+        dot.classList.remove('bg-red-500');
+      } else {
+        dot.classList.add('bg-red-500');
+        dot.classList.remove('bg-green-500');
+      }
+    });
+
+    statusPulses.forEach((pulse) => {
+      if (isInOffice) {
+        pulse.classList.add('bg-green-500');
+        pulse.classList.remove('bg-red-500');
+      } else {
+        pulse.classList.add('bg-red-500');
+        pulse.classList.remove('bg-green-500');
+      }
+    });
+
+    statusTexts.forEach((text) => {
+      text.textContent = isInOffice ? 'På kontoret' : 'Ikke på kontoret';
+    });
+  }
+
+  // Update immediately
+  updateOfficeStatus();
+
+  // Update every minute
+  setInterval(updateOfficeStatus, 60000);
+</script>
