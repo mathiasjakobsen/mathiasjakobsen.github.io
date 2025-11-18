@@ -5,7 +5,7 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Merriweather', 'serif'],
+        serif: ['Noto Serif', 'serif'],
       },
       colors: {
         'frost-dark': 'hsl(0, 0%, 12%)',
