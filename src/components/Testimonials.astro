@@ -60,7 +60,7 @@ const testimonials = [
       <!-- Navigation Buttons -->
       <button
         id="testimonial-prev"
-        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:bg-frost-dark hover:text-white transition-all duration-250 flex items-center justify-center group"
+        class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-4 md:-translate-x-12 z-10 w-12 h-12 bg-white dark:bg-gray-700 text-frost-dark dark:text-gray-100 rounded-full shadow-lg hover:bg-frost-dark dark:hover:bg-gray-600 hover:text-white transition-all duration-250 flex items-center justify-center group"
         aria-label="Previous testimonial"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,7 +70,7 @@ const testimonials = [
 
       <button
         id="testimonial-next"
-        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 bg-white rounded-full shadow-lg hover:bg-frost-dark hover:text-white transition-all duration-250 flex items-center justify-center group"
+        class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-4 md:translate-x-12 z-10 w-12 h-12 bg-white dark:bg-gray-700 text-frost-dark dark:text-gray-100 rounded-full shadow-lg hover:bg-frost-dark dark:hover:bg-gray-600 hover:text-white transition-all duration-250 flex items-center justify-center group"
         aria-label="Next testimonial"
       >
         <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,11 +82,11 @@ const testimonials = [
       <div class="overflow-hidden">
         <div
           id="testimonials-track"
-          class="flex transition-transform duration-500 ease-out"
+          class="flex transition-transform duration-500 ease-out gap-4"
         >
           {testimonials.map((testimonial) => (
-            <div class="flex-shrink-0 w-full px-4">
-              <div class="bg-white rounded-frost p-8 md:p-12 shadow-sm">
+            <div class="flex-shrink-0 testimonial-card">
+              <div class="bg-white dark:bg-gray-800 rounded-frost p-8 md:p-12 shadow-sm border border-gray-100 dark:border-gray-700 h-full">
                 <div class="flex flex-col md:flex-row items-start gap-6">
                   <img
                     src={testimonial.image}
@@ -95,12 +95,12 @@ const testimonials = [
                     loading="lazy"
                   />
                   <div class="flex-1">
-                    <p class="text-lg md:text-xl text-frost-accent leading-relaxed mb-6 italic">
+                    <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 leading-relaxed mb-6 italic">
                       "{testimonial.text}"
                     </p>
                     <div>
-                      <p class="font-medium text-frost-dark">{testimonial.name}</p>
-                      <p class="text-sm text-frost-accent">{testimonial.role}</p>
+                      <p class="font-medium text-frost-dark dark:text-gray-100">{testimonial.name}</p>
+                      <p class="text-sm text-frost-accent dark:text-gray-400">{testimonial.role}</p>
                     </div>
                   </div>
                 </div>
@@ -114,7 +114,7 @@ const testimonials = [
       <div class="flex justify-center gap-2 mt-8">
         {testimonials.map((_, index) => (
           <button
-            class="testimonial-dot w-2 h-2 rounded-full bg-gray-300 hover:bg-frost-accent transition-colors duration-250"
+            class="testimonial-dot w-2 h-2 rounded-full bg-gray-300 dark:bg-gray-600 hover:bg-frost-accent dark:hover:bg-gray-400 transition-colors duration-250"
             data-index={index}
             aria-label={`Go to testimonial ${index + 1}`}
           ></button>
@@ -124,25 +124,49 @@ const testimonials = [
   </div>
 </section>
 
+<style>
+  /* Show 2.25 cards - each card takes 44.44% of width (100/2.25) */
+  .testimonial-card {
+    width: calc((100% - 2rem) / 2.25); /* Accounting for gap */
+  }
+
+  @media (max-width: 768px) {
+    /* On mobile, show 1 full card */
+    .testimonial-card {
+      width: 100%;
+    }
+  }
+</style>
+
 <script>
   const track = document.getElementById('testimonials-track') as HTMLElement;
   const prevButton = document.getElementById('testimonial-prev');
   const nextButton = document.getElementById('testimonial-next');
   const dots = document.querySelectorAll('.testimonial-dot');
+  const cards = document.querySelectorAll('.testimonial-card');
   const totalSlides = dots.length;
   let currentIndex = 0;
 
+  function getCardWidth(): number {
+    if (cards.length === 0) return 0;
+    const card = cards[0] as HTMLElement;
+    // Get card width plus gap (1rem = 16px on each side)
+    return card.offsetWidth + 16;
+  }
+
   function updateCarousel(index: number) {
     currentIndex = index;
-    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    const cardWidth = getCardWidth();
+    const offset = currentIndex * cardWidth;
+    track.style.transform = `translateX(-${offset}px)`;
 
     dots.forEach((dot, i) => {
       if (i === currentIndex) {
-        dot.classList.remove('bg-gray-300');
-        dot.classList.add('bg-frost-dark');
+        dot.classList.remove('bg-gray-300', 'dark:bg-gray-600');
+        dot.classList.add('bg-frost-dark', 'dark:bg-gray-400');
       } else {
-        dot.classList.remove('bg-frost-dark');
-        dot.classList.add('bg-gray-300');
+        dot.classList.remove('bg-frost-dark', 'dark:bg-gray-400');
+        dot.classList.add('bg-gray-300', 'dark:bg-gray-600');
       }
     });
   }
@@ -165,4 +189,13 @@ const testimonials = [
 
   // Initialize first dot as active
   updateCarousel(0);
+
+  // Recalculate on window resize
+  let resizeTimeout: number;
+  window.addEventListener('resize', () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = window.setTimeout(() => {
+      updateCarousel(currentIndex);
+    }, 250);
+  });
 </script>
