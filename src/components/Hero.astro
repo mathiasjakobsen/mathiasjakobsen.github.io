@@ -33,8 +33,19 @@ import OfficeStatus from './OfficeStatus.astro';
       <!-- Image -->
       <div class="w-full md:w-auto md:flex-shrink-0 mt-16">
         <div class="w-full md:w-2/3 lg:w-2/3 overflow-hidden border-0 rounded-md">
-          <img src="./hello.jpg" alt="Mathias Lynnerup Jakobsen" />
+          <img src="./hello.jpg" alt="Mathias Lynnerup Jakobsen" class="hero-image" />
         </div>
       </div>
   </div>
 </section>
+
+<style>
+  /* Apply grayscale filter to hero image in dark mode */
+  .hero-image {
+    transition: filter 0.3s ease;
+  }
+
+  :global(.dark) .hero-image {
+    filter: grayscale(100%);
+  }
+</style>
