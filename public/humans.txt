@@ -1,0 +1,29 @@
+/* TEAM */
+Name: Mathias Lynnerup Jakobsen
+Role: Founder & CTO
+Location: Aarhus, Denmark
+Contact: mathias [at] mathiasjakobsen.dk
+GitHub: @mathiasjakobsen
+LinkedIn: /in/mathiasjakobsen
+
+/* COMPANY */
+Name: JKBSN ApS
+CVR: DK45522717
+Address: Havnegade 2B, 1. sal, 8000 Aarhus C
+
+/* SITE */
+Last update: 2026-03-26
+Language: Danish / English
+Standards: HTML5, CSS3, WCAG 2.2
+Doctype: HTML5
+
+/* TECHNOLOGY */
+Framework: Astro 5
+Styling: Tailwind CSS 3
+Fonts: Noto Serif (Google Fonts)
+Hosting: GitHub Pages
+Domain: mathiasjakobsen.dk
+
+/* THANKS */
+Built with Astro (astro.build)
+Styled with Tailwind CSS (tailwindcss.com)

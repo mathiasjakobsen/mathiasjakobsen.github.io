@@ -1,0 +1,79 @@
+<!-- Easter Eggs: Konami Code + Console Art -->
+<div
+  id="konami-overlay"
+  class="fixed inset-0 z-[200] flex items-center justify-center bg-frost-dark/95 dark:bg-gray-900/95 opacity-0 pointer-events-none transition-opacity duration-500"
+  role="status"
+  aria-live="polite"
+>
+  <div class="text-center px-8">
+    <p class="text-4xl md:text-6xl mb-4">🚀</p>
+    <p class="text-xl md:text-2xl font-serif text-gray-100" style="font-style: italic;">
+      Achievement Unlocked: Source Code Explorer
+    </p>
+    <p class="mt-4 text-sm text-gray-400">Klik hvor som helst for at lukke</p>
+  </div>
+</div>
+
+<script>
+  // === KONAMI CODE ===
+  const konamiSequence = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+  let konamiIndex = 0;
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === konamiSequence[konamiIndex]) {
+      konamiIndex++;
+      if (konamiIndex === konamiSequence.length) {
+        konamiIndex = 0;
+        activateKonami();
+      }
+    } else {
+      konamiIndex = e.key === konamiSequence[0] ? 1 : 0;
+    }
+  });
+
+  function activateKonami() {
+    const overlay = document.getElementById('konami-overlay')!;
+    // Rotate the page
+    document.body.style.transition = 'transform 0.6s ease-in-out';
+    document.body.style.transform = 'rotate(180deg)';
+
+    // Show overlay
+    overlay.style.opacity = '1';
+    overlay.style.pointerEvents = 'auto';
+    // Counter-rotate overlay so text is readable
+    overlay.style.transform = 'rotate(180deg)';
+
+    overlay.addEventListener('click', () => {
+      overlay.style.opacity = '0';
+      overlay.style.pointerEvents = 'none';
+      document.body.style.transform = '';
+      setTimeout(() => {
+        overlay.style.transform = '';
+      }, 600);
+    }, { once: true });
+  }
+
+  // === CONSOLE MESSAGE ===
+  const asciiArt = `
+     ██╗██╗  ██╗██████╗ ███████╗███╗   ██╗   ᴬᵖˢ
+     ██║██║ ██╔╝██╔══██╗██╔════╝████╗  ██║
+     ██║█████╔╝ ██████╔╝███████╗██╔██╗ ██║
+██   ██║██╔═██╗ ██╔══██╗╚════██║██║╚██╗██║
+╚█████╔╝██║  ██╗██████╔╝███████║██║ ╚████║
+ ╚════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝`;
+
+  console.log(
+    `%c${asciiArt}`,
+    'color: #1f1f1f; font-family: monospace; font-size: 10px; line-height: 1.1;'
+  );
+
+  console.log(
+    '%cHej! 👋 Nysgerrig på hvad der er under kølerhjelmen?',
+    'color: #1f1f1f; font-size: 16px; font-weight: bold; font-family: Georgia, serif; padding: 8px 0;'
+  );
+
+  console.log(
+    '%cJeg bygger ting med omtanke, god kode og på masser af kaffe.\nHar du et projekt i tankerne? Lad os snakke.\n\n📧 mathias@mathiasjakobsen.dk\n🐙 github.com/mathiasjakobsen\n\n— Mathias',
+    'color: #333; font-size: 13px; font-family: Georgia, serif; line-height: 1.6;'
+  );
+</script>

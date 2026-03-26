@@ -1,0 +1,41 @@
+# Mathias Lynnerup Jakobsen - mathiasjakobsen.dk
+
+> Freelance CTO, software engineer, and technical advisor based in Aarhus, Denmark.
+
+## About
+
+Mathias Lynnerup Jakobsen is the founder of JKBSN ApS (CVR: DK45522717), a software consultancy offering fractional CTO services, hands-on product and software development, and technical advisory for small to medium-sized businesses.
+
+## Contact
+
+- Email: mathias@mathiasjakobsen.dk
+- Phone: +45 93 96 76 88
+- Address: Havnegade 2B, 1. sal, 8000 Aarhus C, Denmark
+- GitHub: https://github.com/mathiasjakobsen
+- LinkedIn: https://linkedin.com/in/mathiasjakobsen
+
+## Services
+
+1. Digital Strategy for SMEs - Technical roadmaps, architecture reviews, and technology selection for small and medium businesses.
+2. Hands-on Product & Software Development - Full-stack development, from MVP to production systems.
+3. Fractional CTO - Part-time technical leadership on a monthly retainer: strategy, team building, and technical governance without a full-time hire.
+4. Technical Advisory (Raadgivning) - Technical due diligence, architecture reviews, technology choice consulting, and team/process optimization.
+
+## Clients
+
+Omsorg A/S, VoiceArchive, Arnsbo Group, Spotify, M2 Film, Fliva, ADRENALINE Studios, 3P Learning.
+
+## Pages
+
+- / - Home page with services overview, client logos, industry scenarios
+- /om - About Mathias
+- /cases - Case studies (e-commerce, fintech, legacy modernization)
+- /udtalelser - Client testimonials
+- /kontakt - Contact information
+- /raadgiver - Technical advisory services
+- /fractional-cto - Fractional CTO service details
+- /softwareudvikler - Software developer services
+- /ai - AI policy
+- /tilgaengelighed - Accessibility statement
+- /databeskyttelse - Data protection / GDPR policy
+- /vilkaar-og-betingelser - Terms and conditions

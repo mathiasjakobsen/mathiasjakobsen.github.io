@@ -1,0 +1,4 @@
+Contact: mailto:mathias@mathiasjakobsen.dk
+Expires: 2027-03-26T00:00:00.000Z
+Preferred-Languages: da, en
+Canonical: https://mathiasjakobsen.dk/.well-known/security.txt

@@ -1,0 +1,210 @@
+<!-- Command Palette: Cmd/Ctrl + K -->
+<div id="command-palette-backdrop" class="fixed inset-0 bg-black/40 dark:bg-black/60 backdrop-blur-sm z-[100] hidden" aria-hidden="true"></div>
+
+<div
+  id="command-palette"
+  class="fixed inset-0 z-[101] hidden items-start justify-center pt-[20vh]"
+  role="dialog"
+  aria-label="Kommandopalet"
+  aria-modal="true"
+>
+  <div class="w-full max-w-lg mx-4 bg-white dark:bg-gray-900 rounded-xl shadow-2xl border border-gray-200 dark:border-gray-700 overflow-hidden">
+    <!-- Search input -->
+    <div class="flex items-center border-b border-gray-200 dark:border-gray-700 px-4">
+      <svg class="w-5 h-5 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+      </svg>
+      <input
+        id="command-palette-input"
+        type="text"
+        placeholder="Søg kommandoer..."
+        class="w-full px-3 py-4 bg-transparent text-frost-dark dark:text-gray-100 placeholder-gray-400 outline-none text-base font-serif"
+        autocomplete="off"
+        spellcheck="false"
+      />
+      <kbd class="hidden sm:inline-flex items-center px-2 py-0.5 text-xs text-gray-400 bg-gray-100 dark:bg-gray-800 rounded font-mono">ESC</kbd>
+    </div>
+
+    <!-- Results -->
+    <ul
+      id="command-palette-results"
+      class="max-h-80 overflow-y-auto py-2"
+      role="listbox"
+      aria-label="Kommandoer"
+    >
+    </ul>
+
+    <!-- Footer -->
+    <div class="px-4 py-2.5 border-t border-gray-200 dark:border-gray-700 flex items-center gap-4 text-xs text-gray-400">
+      <span class="inline-flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded font-mono">↑↓</kbd> navigér</span>
+      <span class="inline-flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded font-mono">↵</kbd> vælg</span>
+      <span class="inline-flex items-center gap-1"><kbd class="px-1.5 py-0.5 bg-gray-100 dark:bg-gray-800 rounded font-mono">esc</kbd> luk</span>
+    </div>
+  </div>
+</div>
+
+<script>
+  const commands = [
+    { label: 'Hjem', keywords: ['home', 'start', 'forside'], action: 'navigate', value: '/', icon: '🏠' },
+    { label: 'Om', keywords: ['about', 'mig', 'profil'], action: 'navigate', value: '/om', icon: '👤' },
+    { label: 'Cases', keywords: ['projekter', 'portfolio', 'work'], action: 'navigate', value: '/cases', icon: '💼' },
+    { label: 'Udtalelser', keywords: ['testimonials', 'anmeldelser', 'feedback'], action: 'navigate', value: '/udtalelser', icon: '💬' },
+    { label: 'Kontakt', keywords: ['contact', 'email', 'telefon'], action: 'navigate', value: '/kontakt', icon: '📧' },
+    { label: 'Rådgiver', keywords: ['advisor', 'consulting', 'rådgivning'], action: 'navigate', value: '/raadgiver', icon: '🧭' },
+    { label: 'Fractional CTO', keywords: ['cto', 'ledelse', 'teknisk'], action: 'navigate', value: '/fractional-cto', icon: '👔' },
+    { label: 'Softwareudvikler', keywords: ['developer', 'udvikler', 'kode'], action: 'navigate', value: '/softwareudvikler', icon: '⌨️' },
+    { label: 'LinkedIn', keywords: ['social', 'profil', 'netværk'], action: 'external', value: 'https://linkedin.com/in/mathiasjakobsen', icon: '🔗' },
+    { label: 'GitHub', keywords: ['kode', 'repo', 'open source'], action: 'external', value: 'https://github.com/mathiasjakobsen', icon: '🐙' },
+    { label: 'Kopiér email', keywords: ['copy', 'email', 'mail', 'clipboard'], action: 'copy', value: 'mathias@mathiasjakobsen.dk', icon: '📋' },
+    { label: 'Ring op', keywords: ['call', 'telefon', 'phone'], action: 'external', value: 'tel:+4593967688', icon: '📞' },
+    { label: 'Book møde', keywords: ['meeting', 'kalender', 'sparring', 'calendar'], action: 'external', value: 'https://calendar.app.google/sjJBuMZGrPCXMLYH7', icon: '📅' },
+    { label: 'Skift tema', keywords: ['dark', 'light', 'mode', 'tema', 'mørk', 'lys'], action: 'theme', value: '', icon: '🌓' },
+    { label: 'Se kildekode', keywords: ['source', 'github', 'repo', 'view'], action: 'external', value: 'https://github.com/mathiasjakobsen/mathiasjakobsen.github.io', icon: '🔍' },
+  ];
+
+  const backdrop = document.getElementById('command-palette-backdrop')!;
+  const palette = document.getElementById('command-palette')!;
+  const input = document.getElementById('command-palette-input') as HTMLInputElement;
+  const resultsList = document.getElementById('command-palette-results')!;
+  let activeIndex = 0;
+  let filteredCommands = [...commands];
+
+  function open() {
+    backdrop.classList.remove('hidden');
+    palette.classList.remove('hidden');
+    palette.classList.add('flex');
+    input.value = '';
+    activeIndex = 0;
+    render(commands);
+    input.focus();
+    document.body.style.overflow = 'hidden';
+  }
+
+  function close() {
+    backdrop.classList.add('hidden');
+    palette.classList.add('hidden');
+    palette.classList.remove('flex');
+    document.body.style.overflow = '';
+  }
+
+  function render(cmds: typeof commands) {
+    filteredCommands = cmds;
+    resultsList.innerHTML = cmds.map((cmd, i) => `
+      <li
+        role="option"
+        id="cmd-${i}"
+        aria-selected="${i === activeIndex}"
+        class="px-4 py-2.5 cursor-pointer flex items-center gap-3 text-frost-dark dark:text-gray-100 transition-colors ${i === activeIndex ? 'bg-gray-100 dark:bg-gray-800' : 'hover:bg-gray-50 dark:hover:bg-gray-800/50'}"
+      >
+        <span class="text-lg flex-shrink-0" aria-hidden="true">${cmd.icon}</span>
+        <span class="flex-1 font-serif">${cmd.label}</span>
+        ${cmd.action === 'external' ? '<svg class="w-3.5 h-3.5 opacity-40 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 17L17 7M17 7H7M17 7V17"></path></svg>' : ''}
+        ${cmd.action === 'copy' ? '<span class="text-xs text-gray-400">kopiér</span>' : ''}
+      </li>
+    `).join('');
+
+    // Add click handlers
+    resultsList.querySelectorAll('li').forEach((li, i) => {
+      li.addEventListener('click', () => execute(i));
+      li.addEventListener('mouseenter', () => {
+        activeIndex = i;
+        updateActive();
+      });
+    });
+  }
+
+  function updateActive() {
+    resultsList.querySelectorAll('li').forEach((li, i) => {
+      const isActive = i === activeIndex;
+      li.setAttribute('aria-selected', String(isActive));
+      li.classList.toggle('bg-gray-100', isActive);
+      li.classList.toggle('dark:bg-gray-800', isActive);
+    });
+    // Scroll active into view
+    const activeLi = resultsList.querySelector(`#cmd-${activeIndex}`);
+    activeLi?.scrollIntoView({ block: 'nearest' });
+  }
+
+  function execute(index: number) {
+    const cmd = filteredCommands[index];
+    if (!cmd) return;
+    close();
+
+    switch (cmd.action) {
+      case 'navigate':
+        window.location.href = cmd.value;
+        break;
+      case 'external':
+        window.open(cmd.value, '_blank', 'noopener,noreferrer');
+        break;
+      case 'copy':
+        navigator.clipboard.writeText(cmd.value).then(() => {
+          showToast('Email kopieret til udklipsholder');
+        });
+        break;
+      case 'theme':
+        document.documentElement.classList.toggle('dark');
+        const isDark = document.documentElement.classList.contains('dark');
+        localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        break;
+    }
+  }
+
+  function showToast(message: string) {
+    const toast = document.createElement('div');
+    toast.textContent = message;
+    toast.className = 'fixed bottom-6 left-1/2 -translate-x-1/2 px-4 py-2 bg-frost-dark dark:bg-gray-800 text-white rounded-lg shadow-lg text-sm z-[200] transition-opacity duration-300';
+    document.body.appendChild(toast);
+    setTimeout(() => {
+      toast.style.opacity = '0';
+      setTimeout(() => toast.remove(), 300);
+    }, 2000);
+  }
+
+  // Filter on input
+  input.addEventListener('input', () => {
+    const query = input.value.toLowerCase().trim();
+    if (!query) {
+      activeIndex = 0;
+      render(commands);
+      return;
+    }
+    const filtered = commands.filter(cmd =>
+      cmd.label.toLowerCase().includes(query) ||
+      cmd.keywords.some(k => k.includes(query))
+    );
+    activeIndex = 0;
+    render(filtered);
+  });
+
+  // Keyboard navigation
+  input.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown') {
+      e.preventDefault();
+      activeIndex = Math.min(activeIndex + 1, filteredCommands.length - 1);
+      updateActive();
+    } else if (e.key === 'ArrowUp') {
+      e.preventDefault();
+      activeIndex = Math.max(activeIndex - 1, 0);
+      updateActive();
+    } else if (e.key === 'Enter') {
+      e.preventDefault();
+      execute(activeIndex);
+    }
+  });
+
+  // Open/close handlers
+  document.addEventListener('keydown', (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+      e.preventDefault();
+      const isOpen = !palette.classList.contains('hidden');
+      isOpen ? close() : open();
+    }
+    if (e.key === 'Escape' && !palette.classList.contains('hidden')) {
+      e.preventDefault();
+      close();
+    }
+  });
+
+  backdrop.addEventListener('click', close);
+</script>

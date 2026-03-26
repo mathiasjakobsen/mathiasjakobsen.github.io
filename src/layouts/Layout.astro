@@ -1,41 +1,125 @@
 ---
 import GlobalMenu from '../components/GlobalMenu.astro';
+import CommandPalette from '../components/CommandPalette.astro';
+import EasterEggs from '../components/EasterEggs.astro';
 
 interface Props {
   title: string;
   description?: string;
+  canonicalPath?: string;
+  ogImage?: string;
 }
 
-const { title, description = "Professionel teknisk rådgivning og softwareudvikling" } = Astro.props;
+const {
+  title,
+  description = "Professionel teknisk rådgivning og softwareudvikling",
+  canonicalPath,
+  ogImage = "https://mathiasjakobsen.dk/og-image.png",
+} = Astro.props;
+
+const siteUrl = "https://mathiasjakobsen.dk";
+const canonicalUrl = canonicalPath ? `${siteUrl}${canonicalPath}` : Astro.url.href;
 ---
 
+<!--
+
+     ██╗██╗  ██╗██████╗ ███████╗███╗   ██╗   ᴬᵖˢ
+     ██║██║ ██╔╝██╔══██╗██╔════╝████╗  ██║
+     ██║█████╔╝ ██████╔╝███████╗██╔██╗ ██║
+██   ██║██╔═██╗ ██╔══██╗╚════██║██║╚██╗██║
+╚█████╔╝██║  ██╗██████╔╝███████║██║ ╚████║
+ ╚════╝ ╚═╝  ╚═╝╚═════╝ ╚══════╝╚═╝  ╚═══╝
+
+-->
 <!doctype html>
 <html lang="da" class="scroll-smooth">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="description" content={description} />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
     <meta name="generator" content={Astro.generator} />
-    <title>{title}</title>
-    <script is:inline>
-      // Prevent flash of unstyled content
-      (function() {
-        const theme = localStorage.getItem('theme');
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        if (theme === 'dark') {
-          document.documentElement.classList.add('dark');
-        } else if (theme === 'light') {
-          document.documentElement.classList.remove('dark');
-        } else if (prefersDark) {
-          // Only use system preference if no saved theme
+    <!-- Canonical -->
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Theme & Mobile -->
+    <meta name="theme-color" content="#fafafa" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#111827" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="JKBSN" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <!-- Geo -->
+    <meta name="geo.region" content="DK-82" />
+    <meta name="geo.placename" content="Aarhus" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:site_name" content="Mathias Lynnerup Jakobsen" />
+    <meta property="og:locale" content="da_DK" />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Mathias Lynnerup Jakobsen — CTO & Software Engineer" />
+
+    <!-- Twitter / X -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="Mathias Lynnerup Jakobsen — CTO & Software Engineer" />
+
+    <!-- Structured Data -->
+    <script type="application/ld+json" set:html={JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "ProfessionalService",
+      "name": "JKBSN ApS",
+      "legalName": "JKBSN ApS",
+      "description": description,
+      "url": siteUrl,
+      "telephone": "+4593967688",
+      "email": "mathias@mathiasjakobsen.dk",
+      "founder": {
+        "@type": "Person",
+        "name": "Mathias Lynnerup Jakobsen",
+        "jobTitle": "CTO & Software Engineer",
+        "url": siteUrl,
+      },
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Havnegade 2B, 1. sal",
+        "addressLocality": "Aarhus C",
+        "postalCode": "8000",
+        "addressCountry": "DK",
+      },
+      "taxID": "DK45522717",
+      "foundingDate": "2020",
+      "sameAs": [
+        "https://github.com/mathiasjakobsen",
+        "https://linkedin.com/in/mathiasjakobsen",
+      ],
+    })} />
+
+    <!-- Favicons & Manifest -->
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png" />
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+
+    <title>{title}</title>
+
+    <!-- Dark mode: prevent flash -->
+    <script is:inline>
+      (function() {
+        var theme = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        if (theme === 'dark' || (!theme && prefersDark)) {
           document.documentElement.classList.add('dark');
         }
       })();
@@ -46,11 +130,51 @@ const { title, description = "Professionel teknisk rådgivning og softwareudvikl
       Spring til hovedindhold
     </a>
     <GlobalMenu />
+    <CommandPalette />
     <slot />
+    <EasterEggs />
   </body>
 </html>
 
 <style is:global>
+  /* Self-hosted Noto Serif variable font */
+  @font-face {
+    font-family: 'Noto Serif';
+    font-style: normal;
+    font-weight: 100 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url('/fonts/noto-serif-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Noto Serif';
+    font-style: normal;
+    font-weight: 100 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url('/fonts/noto-serif-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+  @font-face {
+    font-family: 'Noto Serif';
+    font-style: italic;
+    font-weight: 100 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url('/fonts/noto-serif-italic-latin-ext.woff2') format('woff2');
+    unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  @font-face {
+    font-family: 'Noto Serif';
+    font-style: italic;
+    font-weight: 100 900;
+    font-stretch: 100%;
+    font-display: swap;
+    src: url('/fonts/noto-serif-italic-latin.woff2') format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
   * {
     box-sizing: border-box;
   }
@@ -65,5 +189,26 @@ const { title, description = "Professionel teknisk rådgivning og softwareudvikl
   h1, h2, h3, h4, h5, h6 {
     font-weight: 300;
     line-height: 1.2;
+  }
+
+  /* Accessibility: focus-visible */
+  :focus-visible {
+    outline: 2px solid #1f1f1f;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  .dark :focus-visible {
+    outline-color: #fafafa;
+  }
+
+  /* Accessibility: reduced motion */
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 </style>
