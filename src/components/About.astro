@@ -1,0 +1,43 @@
+---
+---
+
+<section id="about" class="py-16 md:py-24">
+  <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+    <div class="mb-12 md:mb-16 space-y-4">
+      <h2 class="text-3xl md:text-4xl lg:text-5xl font-light text-frost-dark dark:text-gray-100 mb-4">
+        Hvem er Mathias?
+      </h2>
+      <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 max-w-3xl">
+        Uanset om I har brug for tech <a href="" class="underline underline-offset-2 decoration-1">rådgivning</a>, hands-on <a href="" class="underline underline-offset-2 decoration-1">softwareudvikling</a> eller løbende <a href="" class="underline underline-offset-2 decoration-1">CTO</a> hjælp, så er mit party trick det samme.
+      </p>
+      <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 max-w-3xl">
+        5 år som SMV ejerleder ovenpå 11 år som softwareudvikler. Jeg får ting løst, og ved at du ikke har tid til pjat, uendelige "circkling back" og  - så jeg får ting løst, og ved at du ikke har tid til pjat.
+      <p>
+    </div>
+  </div>
+</section>
+
+<script>
+  const toggleButtons = document.querySelectorAll('.service-toggle');
+
+  toggleButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const serviceId = button.getAttribute('data-service');
+      const content = document.querySelector(`.service-content[data-service="${serviceId}"]`) as HTMLElement;
+      const arrow = button.querySelector('.service-arrow');
+      const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+      if (isExpanded) {
+        // Collapse
+        content.style.maxHeight = '0';
+        arrow?.classList.remove('rotate-180');
+        button.setAttribute('aria-expanded', 'false');
+      } else {
+        // Expand
+        content.style.maxHeight = content.scrollHeight + 'px';
+        arrow?.classList.add('rotate-180');
+        button.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>
