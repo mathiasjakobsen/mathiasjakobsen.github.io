@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
 ---
 
 <Layout title="Freelance CTO i Aarhus - Mathias Jakobsen">
@@ -9,22 +10,22 @@ import Footer from '../components/Footer.astro';
   <main>
     <section class="pt-24 md:pt-32 pb-16 md:pb-24">
       <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
-        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-frost-dark leading-tight mb-6">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-frost-dark dark:text-gray-100 leading-tight mb-6">
           Freelance CTO i Aarhus
         </h1>
-        <p class="text-lg md:text-xl text-frost-accent leading-relaxed max-w-3xl mb-12">
+        <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 leading-relaxed max-w-3xl mb-12">
           Baseret i Aarhus og arbejder med virksomheder i hele Danmark. Få erfaren teknisk ledelse på en fleksibel basis.
         </p>
 
         <div class="space-y-12">
           <div>
-            <h2 class="text-2xl md:text-3xl font-light text-frost-dark mb-4">
+            <h2 class="text-2xl md:text-3xl font-light text-frost-dark dark:text-gray-100 mb-4">
               Hvorfor Vælge en Freelance CTO?
             </h2>
-            <p class="text-lg text-frost-accent leading-relaxed mb-6">
+            <p class="text-lg text-frost-accent dark:text-gray-300 leading-relaxed mb-6">
               For mange virksomheder giver det ikke mening at ansætte en fuldtids CTO i de tidlige stadier. Med en freelance CTO får du:
             </p>
-            <ul class="space-y-3 text-lg text-frost-accent">
+            <ul class="space-y-3 text-lg text-frost-accent dark:text-gray-300">
               <li>• Erfaren teknisk ledelse uden omkostningerne ved en fuldtidsansættelse</li>
               <li>• Fleksibilitet til at skalere op eller ned efter behov</li>
               <li>• Bred erfaring fra mange forskellige brancher og teknologier</li>
@@ -33,30 +34,25 @@ import Footer from '../components/Footer.astro';
           </div>
 
           <div>
-            <h2 class="text-2xl md:text-3xl font-light text-frost-dark mb-4">
+            <h2 class="text-2xl md:text-3xl font-light text-frost-dark dark:text-gray-100 mb-4">
               Lokalt i Aarhus, Nationalt i Danmark
             </h2>
-            <p class="text-lg text-frost-accent leading-relaxed">
+            <p class="text-lg text-frost-accent dark:text-gray-300 leading-relaxed">
               Selvom jeg er baseret i Aarhus, arbejder jeg med virksomheder i hele Danmark. Med moderne kommunikationsværktøjer og fleksible arbejdsformer kan vi samarbejde effektivt uanset placering. Personlige møder i Aarhus-området kan nemt arrangeres.
             </p>
           </div>
 
           <div>
-            <h2 class="text-2xl md:text-3xl font-light text-frost-dark mb-4">
+            <h2 class="text-2xl md:text-3xl font-light text-frost-dark dark:text-gray-100 mb-4">
               Erfaring med Aarhus Tech-Scenen
             </h2>
-            <p class="text-lg text-frost-accent leading-relaxed">
+            <p class="text-lg text-frost-accent dark:text-gray-300 leading-relaxed">
               Jeg har arbejdet med adskillige tech-virksomheder i Aarhus og har et godt netværk i det lokale startup-økosystem. Dette giver mig indsigt i de specifikke udfordringer og muligheder for tech-virksomheder i regionen.
             </p>
           </div>
 
           <div class="pt-8">
-            <a
-              href="/kontakt"
-              class="inline-block px-8 py-3 bg-frost-dark text-white rounded-frost hover:bg-frost-accent transition-all duration-250 hover:scale-105 hover:shadow-lg"
-            >
-              Lad os tage en snak
-            </a>
+            <Button href="/kontakt">Lad os tage en snak</Button>
           </div>
         </div>
       </div>

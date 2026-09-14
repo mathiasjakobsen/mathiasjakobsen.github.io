@@ -1,0 +1,17 @@
+---
+interface Props {
+  href: string;
+  external?: boolean;
+}
+
+const { href, external = false } = Astro.props;
+const externalAttrs = external ? { target: '_blank', rel: 'noopener noreferrer' } : {};
+---
+
+<a
+  href={href}
+  class="inline-block px-8 py-3 bg-frost-dark dark:bg-gray-800 text-white rounded-frost hover:bg-frost-accent dark:hover:bg-gray-700 transition-all duration-250 hover:scale-105 hover:shadow-lg"
+  {...externalAttrs}
+>
+  <slot />
+</a>
