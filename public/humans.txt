@@ -9,7 +9,7 @@ LinkedIn: /in/mathiasjakobsen
 /* COMPANY */
 Name: JKBSN ApS
 CVR: DK45522717
-Address: Havnegade 2B, 1. sal, 8000 Aarhus C
+Address: Klostergade 70B, 2. sal, 8000 Aarhus C
 
 /* SITE */
 Last update: 2026-03-26

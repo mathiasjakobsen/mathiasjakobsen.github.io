@@ -6,7 +6,7 @@ title: Vilkår og Betingelser - Mathias Jakobsen
 # Vilkår og Betingelser
 
 ## 1. Generelt
-Disse generelle vilkår ("Vilkår") gælder for alle ydelser, som jeg igennem JKBSN ApS, CVR-nr. DK45522717, med adresse Havnegade 2B, 1. sal, 8000 Aarhus C, Danmark, leverer til mine kunder ("Kunden"). Kundens egne vilkår gælder kun, hvis de skriftligt er aftalt med mig.
+Disse generelle vilkår ("Vilkår") gælder for alle ydelser, som jeg igennem JKBSN ApS, CVR-nr. DK45522717, med adresse Klostergade 70B, 2. sal, 8000 Aarhus C, Danmark, leverer til mine kunder ("Kunden"). Kundens egne vilkår gælder kun, hvis de skriftligt er aftalt med mig.
 
 Vilkårene udgør en juridisk bindende aftale mellem mig og Kunden, når Kunden accepterer mit tilbud eller min ordrebekræftelse.
 
