@@ -30,6 +30,7 @@ Omsorg A/S, VoiceArchive, Arnsbo Group, Spotify, M2 Film, Fliva, ADRENALINE Stud
 - / - Home page with services overview, client logos, industry scenarios
 - /om - About Mathias
 - /cases - Case studies (e-commerce, fintech, legacy modernization)
+- /tech-stack - Technologies used in production, preferred choices per category
 - /udtalelser - Client testimonials
 - /kontakt - Contact information
 - /raadgiver - Technical advisory services

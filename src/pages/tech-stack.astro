@@ -1,0 +1,181 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Button from '../components/Button.astro';
+
+interface Tool {
+  name: string;
+  url: string;
+  favorite?: boolean;
+  note?: string;
+}
+
+const categories: { title: string; description: string; tools: Tool[] }[] = [
+  {
+    title: 'Backend',
+    description: 'Sprog og frameworks til alt fra små API\'er til hele produkter.',
+    tools: [
+      { name: 'Go', url: 'https://go.dev', favorite: true },
+      { name: 'Ruby on Rails', url: 'https://rubyonrails.org', favorite: true },
+      { name: 'PHP', url: 'https://www.php.net' },
+      { name: '.NET', url: 'https://dotnet.microsoft.com' },
+      { name: 'Node.js', url: 'https://nodejs.org' },
+    ],
+  },
+  {
+    title: 'Databaser',
+    description: 'Relationelt som udgangspunkt, dokumentbaseret når data kalder på det.',
+    tools: [
+      { name: 'PostgreSQL', url: 'https://www.postgresql.org', favorite: true },
+      { name: 'MySQL', url: 'https://www.mysql.com' },
+      { name: 'MongoDB', url: 'https://www.mongodb.com' },
+      { name: 'Amazon DocumentDB', url: 'https://aws.amazon.com/documentdb/' },
+      { name: 'Cloud Firestore', url: 'https://firebase.google.com/docs/firestore' },
+    ],
+  },
+  {
+    title: 'Caching',
+    description: 'Når svartider skal ned, og databasen skal have lidt ro.',
+    tools: [
+      { name: 'Redis', url: 'https://redis.io', favorite: true },
+      { name: 'Memcached', url: 'https://memcached.org' },
+    ],
+  },
+  {
+    title: 'Frontend & apps',
+    description: 'Web og native apps, gerne fra én og samme kodebase.',
+    tools: [
+      { name: 'React', url: 'https://react.dev', favorite: true },
+      { name: 'React Native', url: 'https://reactnative.dev', favorite: true },
+      { name: 'Expo', url: 'https://expo.dev', favorite: true },
+      { name: 'Flutter', url: 'https://flutter.dev' },
+    ],
+  },
+  {
+    title: 'Hosting',
+    description: 'Fra en enkelt server til hele cloud-setups.',
+    tools: [
+      { name: 'Hetzner', url: 'https://www.hetzner.com', favorite: true },
+      { name: 'AWS', url: 'https://aws.amazon.com', note: 'S3, EC2 mv.' },
+      { name: 'DigitalOcean', url: 'https://www.digitalocean.com' },
+    ],
+  },
+  {
+    title: 'Deployment & infrastruktur',
+    description: 'Så simpelt som muligt, så komplekst som nødvendigt.',
+    tools: [
+      { name: 'Docker', url: 'https://www.docker.com', favorite: true },
+      { name: 'Kamal', url: 'https://kamal-deploy.org', favorite: true },
+      { name: 'Terraform', url: 'https://developer.hashicorp.com/terraform' },
+      { name: 'Coolify', url: 'https://coolify.io' },
+      { name: 'Capistrano', url: 'https://capistranorb.com' },
+      { name: 'Kubernetes', url: 'https://kubernetes.io' },
+    ],
+  },
+];
+
+const graveyard: Tool[] = [
+  { name: 'Chef', url: 'https://www.chef.io' },
+  { name: 'Flynn', url: 'https://github.com/flynn/flynn' },
+  { name: 'Dokku', url: 'https://dokku.com' },
+  { name: 'Meteor', url: 'https://www.meteor.com' },
+  { name: 'Marionette.js', url: 'https://marionettejs.com' },
+  { name: 'Backbone.js', url: 'https://backbonejs.org' },
+  { name: 'Zend Framework', url: 'https://framework.zend.com', note: 'nu Laminas' },
+  { name: 'Dojo Toolkit + Dijit', url: 'https://dojotoolkit.org', note: 'the real OG of frontend frameworks' },
+];
+---
+
+<Layout
+  title="Tech stack - Mathias Lynnerup Jakobsen"
+  description="Det rette værktøj til den rette opgave. Teknologier jeg har brugt i produktion og kommercielle projekter."
+  canonicalPath="/tech-stack"
+>
+  <Header />
+  <main id="main-content">
+    <section class="pt-24 md:pt-32 pb-16 md:pb-24">
+      <div class="max-w-4xl px-4 sm:px-6 lg:px-8 ml-4 sm:ml-12 lg:ml-24">
+        <h1 class="text-4xl md:text-5xl lg:text-6xl font-light text-frost-dark dark:text-gray-100 leading-tight mb-6">
+          Det rette værktøj til den rette opgave
+        </h1>
+
+        <div class="space-y-4 text-lg md:text-xl text-frost-accent dark:text-gray-300 leading-relaxed max-w-3xl mb-12 md:mb-16">
+          <p>
+            En bootstrapped MVP og en platform med millioner af brugere har sjældent brug for den samme stack. Derfor starter jeg med opgaven, teamet og budgettet, og vælger teknologien bagefter.
+          </p>
+          <p>
+            Herunder er de teknologier, jeg har brugt i rigtig produktion og kommercielle projekter. Dertil kommer alle de tusindvis af JavaScript-frameworks og <i class="italic">"det skal jeg lige prøve at lege med"</i>-teknologier, naturligvis.
+          </p>
+          <p class="text-base">
+            <span aria-hidden="true">★</span><span class="sr-only">Stjerne</span> = mit foretrukne valg inden for kategorien. Der hvor jeg starter, hvis intet taler imod.
+          </p>
+        </div>
+
+        <div class="grid gap-6 md:gap-8">
+          {categories.map((category) => (
+            <div class="bg-white dark:bg-gray-800 rounded-frost p-6 md:p-8 border border-gray-200 dark:border-gray-700">
+              <h2 class="text-2xl font-light text-frost-dark dark:text-gray-100 mb-2">{category.title}</h2>
+              <p class="text-frost-accent dark:text-gray-300 mb-5">{category.description}</p>
+              <ul class="flex flex-wrap gap-2">
+                {category.tools.map((tool) => (
+                  <li>
+                    <a
+                      href={tool.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      aria-label={`${tool.name}${tool.favorite ? ' (foretrukket)' : ''} (åbner i nyt vindue)`}
+                      class:list={[
+                        'inline-flex items-center gap-1.5 px-3 py-1 text-sm rounded-full border transition-colors duration-250',
+                        tool.favorite
+                          ? 'bg-frost-dark text-white border-frost-dark hover:bg-frost-accent dark:bg-gray-100 dark:text-gray-900 dark:border-gray-100 dark:hover:bg-white'
+                          : 'bg-frost-light text-frost-accent border-gray-200 hover:border-frost-dark hover:text-frost-dark dark:bg-gray-700 dark:text-gray-300 dark:border-gray-600 dark:hover:border-gray-300 dark:hover:text-gray-100',
+                      ]}
+                    >
+                      {tool.favorite && <span aria-hidden="true">★</span>}
+                      {tool.name}
+                      {tool.note && <span class="opacity-60">({tool.note})</span>}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))}
+        </div>
+
+        <div class="mt-16 md:mt-24">
+          <h2 class="text-2xl md:text-3xl font-light text-frost-dark dark:text-gray-100 mb-4">
+            Vinterhi  <span aria-hidden="true">💤</span>
+          </h2>
+          <p class="text-lg text-frost-accent dark:text-gray-300 leading-relaxed max-w-3xl mb-6">
+            Lidt som at cykle, så glemmer man ikke et værktøj man har brugt dagligt i mange år. Jeg har imidlertig hverken cyklet eller brug disse værktøjer i 5+ år, så de skal lige støves af hvis de skal i brug igen.
+          </p>
+          <ul class="flex flex-wrap gap-2">
+            {graveyard.map((tool) => (
+              <li>
+                <a
+                  href={tool.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${tool.name} (åbner i nyt vindue)`}
+                  class="inline-flex items-center gap-1.5 px-3 py-1 text-sm rounded-full border border-dashed border-gray-300 dark:border-gray-600 text-gray-500 dark:text-gray-400 hover:text-frost-dark hover:border-frost-dark dark:hover:text-gray-100 dark:hover:border-gray-300 transition-colors duration-250"
+                >
+                  {tool.name}
+                  {tool.note && <span class="opacity-70 italic">({tool.note})</span>}
+                </a>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="mt-16 md:mt-24 space-y-6">
+          <p class="text-lg md:text-xl text-frost-accent dark:text-gray-300 max-w-3xl">
+            Står I og skal vælge stack, eller er I i tvivl om den I har? Lad os tage en snak.
+          </p>
+          <Button href="/kontakt">Kom i kontakt</Button>
+        </div>
+      </div>
+    </section>
+  </main>
+  <Footer />
+</Layout>
